@@ -29,7 +29,7 @@ class PokemonSerializer(serializers.ModelSerializer):
         model = Pokemon
         fields = ('pk', 'name',  'forms', 'types')
 
-    def create(self, validate_data) ->  Pokemon:
+    def create(self, validate_data) -> Pokemon:
         types = self.validated_data.pop('types', [])
         pokemon = Pokemon.objects.create(**self.validated_data)
         for pokemon_type in types:

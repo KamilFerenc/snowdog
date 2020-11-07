@@ -8,12 +8,18 @@ from rest_framework import status
 from snowdog.pokemons.serializers import PokemonSerializer
 
 
+second = 1
+minute = 60 * second
+hour = 60 * minute
+day = 24 * hour
+
+
 class PokemonApiDataFetcher:
     ERROR = 'error'
 
     def __init__(self, name: str):
         self.name = name
-        self.url = f"https://pokeapi.co/api/v2/pokemon/{self.name.lower()}"
+        self.url = f"https://pokeapi.co/api/v2/pokemon/{self.name}"
 
     @cached_property
     def response(self) -> Response:
