@@ -1,11 +1,12 @@
 from typing import Union
 
 from django.core.cache import cache
+from django_filters import rest_framework as filters
 from django.http import HttpRequest
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 from rest_framework import status
-from rest_framework.generics import CreateAPIView, RetrieveAPIView
+from rest_framework.generics import CreateAPIView, RetrieveAPIView, ListAPIView
 from rest_framework.permissions import AllowAny
 from rest_framework.request import Request
 from rest_framework.response import Response
@@ -43,3 +44,11 @@ class DetailPokemonApiView(PokemonApiViewMixin, RetrieveAPIView):
 
 
 detail_pokemon_api_view = DetailPokemonApiView.as_view()
+
+
+class ListPokemonApiView(PokemonApiViewMixin, ListAPIView):
+    filter_backends = (filters.DjangoFilterBackend,)
+    filterset_fields = ('types__name',)
+
+
+list_pokemon_api_view = ListPokemonApiView.as_view()
