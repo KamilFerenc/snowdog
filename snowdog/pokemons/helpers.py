@@ -41,10 +41,9 @@ class PokemonApiDataFetcher:
         if serializer.is_valid(raise_exception=True):
             serializer.save()
             return serializer.data
-        return self.ERROR
 
     def run(self) -> tuple:
         if self.check_if_valid_data():
             pokemon = self.save_pokemon()
             return pokemon, status.HTTP_201_CREATED
-        return {self.ERROR: self.response.content}, status.HTTP_400_BAD_REQUEST
+        return self.response.content, status.HTTP_400_BAD_REQUEST

@@ -1,10 +1,10 @@
 from typing import Union
 
 from django.core.cache import cache
-from django_filters import rest_framework as filters
 from django.http import HttpRequest
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
+from django_filters import rest_framework as filters
 from rest_framework import status
 from rest_framework.generics import CreateAPIView, RetrieveAPIView, ListAPIView
 from rest_framework.permissions import AllowAny
@@ -22,7 +22,7 @@ class PokemonApiViewMixin:
     queryset = Pokemon.objects.all()
 
 
-class CatchPokemonApiView(PokemonApiViewMixin,  CreateAPIView):
+class CatchPokemonApiView(PokemonApiViewMixin, CreateAPIView):
     def post(self, request: Union[Request, HttpRequest], *args, **kwargs) -> Response:
         serializer = PokemonNameSerializer(data=self.request.data)
         if serializer.is_valid():
