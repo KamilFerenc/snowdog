@@ -2,7 +2,7 @@ version: '3.7'
 
 services:
   db:
-    image: "postgres:13.0"
+    image: postgres:13.0
     volumes:
       - pg_data:/var/lib/postgresql/data
     env_file:
@@ -19,11 +19,20 @@ services:
       - "8000:8000"
     depends_on:
       - db
+      - cache
     env_file:
       - .env
     links:
       - db
     restart: always
+
+  cache:
+    image: memcached:1.6.8
+    ports:
+      - "11211:11211"
+    entrypoint:
+      - memcached
+      - -m 64
 
 volumes:
   pg_data:

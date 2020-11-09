@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_extensions',
     'rest_framework',
+    'django_filters',
+    'snowdog.pokemons'
 ]
 
 MIDDLEWARE = [
