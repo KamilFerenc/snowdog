@@ -1,8 +1,8 @@
 FROM python:3.9
 
 WORKDIR /app
-COPY ./doc/requirements/base.txt /app/doc/requirements/
-RUN pip install -r ./doc/requirements/base.txt
+COPY requirements.txt /app/
+RUN pip install -r ./requirements.txt
 COPY . /app/
 
 RUN useradd -ms /bin/bash  snowdog
