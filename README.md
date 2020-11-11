@@ -2,13 +2,13 @@
 
 ## Setup
 *Requirements*
- - It is required to have installed Docker at computer
+ - It is required to have Docker installed
 
 1) Clone repository `git clone https://github.com/KamilFerenc/snowdog.git`
-2) Go to project directory where exist file `Dockerfile`
+2) Go to project directory where `Dockerfile` exists
 3) Run command `docker build .`
 4) Run command `docker-compose up`
-5) Open browse eg. `127.0.0.8000/api/pokemon`
+5) Open browser eg. `localhost:8000/api/pokemon/`
 
 ## Endpoints
 1) `GET api/pokemon` - list all pokemons saved in database
@@ -21,7 +21,7 @@
 2) Run command `python manage.py test`
 
 ## Heroku app
-App is deployed at Heroku platform. Has been implemented cache mechanism `MemCachier` in order to cache requests.
+App is deployed at Heroku platform. Has implemented cache mechanism `MemCachier` in order to cache requests.
 Visit link and feel free to test it https://snowdog-pokemonapp.herokuapp.com/api/pokemon/
 
 ## Testing Heroku
