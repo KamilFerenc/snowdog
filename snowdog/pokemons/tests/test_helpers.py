@@ -79,7 +79,7 @@ class PokemonApiDataFetcherTest(TestCase):
         result = self.pokemon_api_fetcher(self.pokemon_name).save_pokemon()
         mock_prepare_data.assert_called_once()
         pokemon = Pokemon.objects.get(name=self.pokemon_name)
-        self.assertEqual(result['pk'], pokemon.pk)
+        self.assertEqual(result['id'], pokemon.pk)
         self.assertEqual(result['name'], self.pokemon_name)
         self.assertEqual(pokemon.types.count(), len(data['types']))
         self.assertEqual(pokemon.types.first().name, data['types'][0]['type']['name'])
