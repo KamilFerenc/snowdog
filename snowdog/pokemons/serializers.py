@@ -9,9 +9,11 @@ from snowdog.pokemons.models import Pokemon, PokemonType
 class PokemonNameSerializer(serializers.Serializer):
     name = serializers.CharField(max_length=255, required=True)
 
-    def validate_name(self,  name) -> Union[str, serializers.ValidationError]:
+    def validate_name(self,  name: str) -> Union[str, serializers.ValidationError]:
         if Pokemon.objects.filter(name=name).exists():
             raise serializers.ValidationError(_(f'Pokemon with name {name} already exists in database.'))
+        elif name.isnumeric():
+            raise serializers.ValidationError(_('Pokemon name can not be a numeric value.'))
         return name
 
 
@@ -27,7 +29,7 @@ class PokemonSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Pokemon
-        fields = ('pk', 'name',  'forms', 'types')
+        fields = ('id', 'name',  'forms', 'types')
 
     def create(self, validate_data) -> Pokemon:
         types = self.validated_data.pop('types', [])

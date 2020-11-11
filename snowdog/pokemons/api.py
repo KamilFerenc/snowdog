@@ -11,6 +11,7 @@ from rest_framework.permissions import AllowAny
 from rest_framework.request import Request
 from rest_framework.response import Response
 
+from snowdog.pokemons.filters import PokemonFilter
 from snowdog.pokemons.helpers import PokemonApiDataFetcher, day
 from snowdog.pokemons.models import Pokemon
 from snowdog.pokemons.serializers import PokemonSerializer, PokemonNameSerializer
@@ -48,7 +49,7 @@ detail_pokemon_api_view = DetailPokemonApiView.as_view()
 
 class ListPokemonApiView(PokemonApiViewMixin, ListAPIView):
     filter_backends = (filters.DjangoFilterBackend,)
-    filterset_fields = ('types__name',)
+    filterset_class = PokemonFilter
 
 
 list_pokemon_api_view = ListPokemonApiView.as_view()

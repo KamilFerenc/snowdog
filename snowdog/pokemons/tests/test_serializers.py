@@ -24,6 +24,13 @@ class PokemonNameSerializerTest(TestCase):
         expected_error = _(f'Pokemon with name {self.pokemon_name} already exists in database.')
         self.assertIn(expected_error, serializer.errors['name'])
 
+    def test_serializer_invalid_number_name(self):
+        self.data['name'] = '123'
+        serializer = self.serializer(data=self.data)
+        self.assertFalse(serializer.is_valid())
+        expected_error = _('Pokemon name can not be a numeric value.')
+        self.assertIn(expected_error, serializer.errors['name'])
+
 
 class PokemonSerializerTest(TestCase):
     def setUp(self) -> None:
